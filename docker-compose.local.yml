@@ -1,0 +1,27 @@
+version: "3"
+   
+services:
+  hexa-server:
+    container_name: hexa-server
+    image: 749960970623.dkr.ecr.ap-northeast-2.amazonaws.com/hexa-server
+    build:
+      context: app
+      dockerfile: Dockerfile
+    restart: always
+    command: uwsgi app.ini
+    volumes:
+      - $HOME/.aws/:/root/.aws/
+      - $PWD/app/:/usr/src/app
+  nginx:
+    container_name: hexa-server-nginx
+    image: 749960970623.dkr.ecr.ap-northeast-2.amazonaws.com/hexa-server-nginx
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+        - "80:80"
+    environment:
+        - TZ=Asia/Seoul
+    logging:
+        driver: none
