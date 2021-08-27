@@ -6,6 +6,15 @@ services:
     image: 749960970623.dkr.ecr.ap-northeast-2.amazonaws.com/hexa-server
     restart: always
     command: python app.py
+  redis:
+    container_name: redis
+    image: redis:latest
+    restart: always
+    hostname: redis
+    network_mode: host
+    ports:
+      - 6379:6379
+    command: redis-server
   nginx:
     container_name: nginx
     image: 749960970623.dkr.ecr.ap-northeast-2.amazonaws.com/hexa-server-nginx

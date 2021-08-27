@@ -12,6 +12,15 @@ services:
     volumes:
       - $HOME/.aws/:/root/.aws/
       - $PWD/app/:/usr/src/app
+  redis:
+    container_name: redis
+    image: redis:latest
+    restart: always
+    hostname: redis
+    # network_mode: host
+    # ports:
+    #   - 6379:6379
+    command: redis-server
   nginx:
     container_name: hexa-server-nginx
     image: 749960970623.dkr.ecr.ap-northeast-2.amazonaws.com/hexa-server-nginx

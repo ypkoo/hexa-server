@@ -5,6 +5,8 @@ import boto3
 from pynamodb.models import DoesNotExist
 from pynamodb.exceptions import DeleteError, PutError, UpdateError
 
+import redis
+
 from models import HexaSleepResultModel
 from params_schema import CreateSessionSchema, UpdateSessionSchema
 from configs import AUDIO_BUCKET
@@ -19,6 +21,10 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
+
+@app.post('/status/<int:room_id>')
+def update_status():
+    pass
 
 @app.post('/session')
 def create_session():
